@@ -1,14 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<script>
+  </head>
+  <script>
+    function getRandomNumber() {
+      return Math.floor(Math.random() * 100);
+    }
+
+    function getComputerChoice() {
+      let chance = getRandomNumber();
+      if (chance <= 34) {
+        return "ROCK";
+      } else if (chance <= 67) {
+        return "PAPER";
+      } else return "SCISSORS";
+    }
+
+    function getHumanChoice() {
+      const values = ["ROCK", "PAPER", "SCISSORS"];
+      let choice = prompt("Choose your option: ROCK / PAPER / SCISSORS");
+
+      let wrong = 0;
+      for (let i = 0; i < values.length; i++) {
+        if (choice.toUpperCase() != values[i]) {
+          wrong += 1;
+        }
+      }
+      if (wrong === 3) {
+        console.log("Wrong input entered, please provide correct value!");
+        getHumanChoice();
+      } else {
+        return choice.toUpperCase();
+      }
+    }
+
+    function fight() {
+      humanChoice = getHumanChoice();
+      computerChoice = getComputerChoice();
+
+      console.log("Player's choice ---> " + humanChoice);
+      console.log("Computer's choice ---> " + computerChoice);
+
+      if (humanChoice === "ROCK" && computerChoice === "SCISSORS") {
+        return 0; // 0 = human win
+      } else if (humanChoice === "ROCK" && computerChoice === "ROCK") {
+        return 1; // 1 = draw
+      } else if (humanChoice === "ROCK" && computerChoice === "PAPER") {
+        return 2; // 2 = computer win
+      }
+
+      if (humanChoice === "PAPER" && computerChoice === "SCISSORS") {
+        return 2;
+      } else if (humanChoice === "PAPER" && computerChoice === "ROCK") {
+        return 0;
+      } else if (humanChoice === "PAPER" && computerChoice === "PAPER") {
+        return 1;
+      }
+
+      if (humanChoice === "SCISSORS" && computerChoice === "SCISSORS") {
+        return 1;
+      } else if (humanChoice === "SCISSORS" && computerChoice === "ROCK") {
+        return 2;
+      } else if (humanChoice === "SCISSORS" && computerChoice === "PAPER") {
+        return 0;
+      }
+    }
+
+    function score(humanScore, computerScore) {
+      fightResult = fight();
+
+      if (fightResult === 0) {
+        console.log("Player WINS!!!");
+        humanScore = humanScore + 1;
+      } else if (fightResult === 2) {
+        console.log("Computer WINS!!!");
+        computerScore = computerScore + 1;
+      } else {
+        console.log("It's a DRAW!!!");
+      }
+
+      console.log("PLAYER SCORE:" + humanScore);
+      console.log("COMPUTER SCORE:" + computerScore);
+      console.log("");
+    }
+
+    let play = true;
     
-</script>
-<body>
-    
-</body>
+
+    console.log("Welcome to Rock Paper Scissors!");
+    while (play === true) {
+      let humanScore = 0;
+      let computerScore = 0;
+      score(humanScore, computerScore);
+      let again = prompt("Would you like to play again?", "YES");
+      if (again === "NO") {
+        play = false;
+      }
+    }
+  </script>
+  <body></body>
 </html>
