@@ -74,29 +74,36 @@
 
       if (fightResult === 0) {
         console.log("Player WINS!!!");
+        console.log("");
         humanScore = humanScore + 1;
       } else if (fightResult === 2) {
         console.log("Computer WINS!!!");
+        console.log("");
         computerScore = computerScore + 1;
       } else {
         console.log("It's a DRAW!!!");
+        console.log("");
       }
 
       console.log("PLAYER SCORE:" + humanScore);
       console.log("COMPUTER SCORE:" + computerScore);
       console.log("");
+
+      return {humanScore, computerScore};
     }
 
     let play = true;
-    
+    let humanScore = 0;
+    let computerScore = 0;
 
     console.log("Welcome to Rock Paper Scissors!");
     while (play === true) {
-      let humanScore = 0;
-      let computerScore = 0;
-      score(humanScore, computerScore);
+      const scores = score(humanScore, computerScore);
+      humanScore = scores.humanScore;
+      computerScore = scores.computerScore;
+      
       let again = prompt("Would you like to play again?", "YES");
-      if (again === "NO") {
+      if (again != "YES") {
         play = false;
       }
     }
